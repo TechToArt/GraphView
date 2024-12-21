@@ -368,7 +368,7 @@ class SugiyamaLayoutManager @JvmOverloads constructor(private val context: Conte
                 root[i][n] = n
                 align[i][n] = n
                 sink[i][n] = n
-                shift[i][n] = java.lang.Float.MAX_VALUE
+                shift[i][n] = 0f
                 x[i][n] = java.lang.Float.MIN_VALUE
                 blockWidth[i][n] = 0f
             }
@@ -596,9 +596,9 @@ class SugiyamaLayoutManager @JvmOverloads constructor(private val context: Conte
                     // the first median
                     val median = floor((adjNodes.size + 1) / 2.0).toInt()
                     val medianCount = if (adjNodes.size % 2 == 1) 1 else 2
-
+                    val medianIndexList = if (leftToRight) (0 until medianCount) else (0 until medianCount).reversed()
                     // for all median neighbours in direction of H
-                    (0 until medianCount).forEach { count ->
+                    medianIndexList.forEach { count ->
                         val m = adjNodes[median + count - 1]
                         val posM = pos(m)
 
